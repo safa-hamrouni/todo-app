@@ -10,9 +10,17 @@ function addTodo () {
   if (newTodo.value.length === 0) {
     alert("please fill in a task!");
   } else {
-    todos.value.push({ id: id++, text: newTodo.value, done: false})
+    todos.value.push({ id: id++, text: newTodo.value, done: false, editable: false })
     newTodo.value = ''
   }
+}
+
+function saveTodo () {
+  // todo.text = newTodo.value
+}
+
+function onRemoveTodo (todo) {
+  todos.value = todos.value.filter(task => task.id !== todo.id)
 }
 
 </script>
@@ -22,13 +30,15 @@ function addTodo () {
     <h3>let's keep track of our Todos</h3>
     <div>
       <form @submit.prevent="addTodo">
-        <input v-model="newTodo" />
+        <input name="task" v-model="newTodo" />
         <button>submit</button>
       </form>
       <TodoItem
         v-for="(todo, index) in todos"
         :key="index"
-        :todo="todo"  
+        :todo="todo"
+        @saveTodo="saveTodo"
+        @onRemoveTodo="onRemoveTodo"
       />
     </div>
     
