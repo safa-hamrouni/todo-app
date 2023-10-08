@@ -24,13 +24,14 @@ function addTodo () {
 }
 
 function updateTodo (todo) {
-  todos.value.push({
-    id: todo.id,
-    text: todo.text,
-    done: todo.done,
-    editable: todo.editable
+  const editedTodos = todos.value.map(task => {
+    console.log(todo, task)
+    if (task.id === todo.id) {
+      task.text = todo.text
+    }
+    return task
   })
-  localStorage.setItem('todos', JSON.stringify(todos.value))
+  localStorage.setItem('todos', JSON.stringify(editedTodos))
 }
 
 function onRemoveTodo (todo) {
@@ -62,7 +63,6 @@ function markAsDone (todo) {
         v-for="(todo, index) in todos"
         :key="index"
         :todo="todo"
-        @saveTodo="saveTodo"
         @onRemoveTodo="onRemoveTodo"
         @markAsDone="markAsDone"
         @updateTodo="updateTodo(todo)"
