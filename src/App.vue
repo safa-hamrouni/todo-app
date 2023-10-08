@@ -5,7 +5,7 @@ import TodoView from './components/TodoView.vue'
 <template>
   <main>
     <div class="wrapper">
-      <TodoView msg="You did it!" />
+      <TodoView />
     </div>
   </main>
 </template>
